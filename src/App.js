@@ -4,10 +4,10 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./styles/theme";
 import { AuthContext, AuthProvider } from "./utils/authenticationUtil";
 import { ReactNotifications } from 'react-notifications-component'
-import Topbar from "./views/global/Topbar";
-import Sidebar from "./views/global/Sidebar";
-import Index from "./views/index";
-import Login from "./views/login";
+import Topbar from "./views/main/global/Topbar";
+import Sidebar from "./views/main/global/Sidebar";
+import Index from "./views/main/index";
+import Login from "./views/main/login";
 
 function App() {
   const [theme, colorMode] = useMode();
