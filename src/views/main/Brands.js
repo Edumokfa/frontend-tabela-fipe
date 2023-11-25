@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { apiGet, apiDelete, HttpStatus, apiPut } from '../../middlewares/communicationMiddleware';
+import { apiGet, apiDelete, HttpStatus, apiPost, apiPut } from '../../middlewares/communicationMiddleware';
 import {
   Form,
   FormGroup,
@@ -18,7 +18,8 @@ import Header from "components/Headers/Header.js";
 
 const Tables = () => {
   const [brandList, setBrandList] = useState([]);
-  const [brandInEdit, setBrandInEdit] = useState("");
+  const brandFormat = { codigo: "", nome: "", tipo: "Carro" };
+  const [brandInEdit, setBrandInEdit] = useState(brandFormat);
   const [open, setOpen] = useState(false);
 
   const handleOpen = (brand) => {
@@ -44,7 +45,7 @@ const Tables = () => {
       const response = await apiDelete("/marcas/" + id);
       if (response.status === HttpStatus.Ok) {
         await getBrands();
-        notify("Registro Excluído com Sucesso");      
+        notify("Registro Excluído com Sucesso");
       };
     } catch (error) {
       console.log(error);
@@ -53,6 +54,17 @@ const Tables = () => {
 
   const saveBrand = async (e) => {
     e.preventDefault();
+
+    if (!brandInEdit.nome.trim()) {
+      notify("O nome é obrigatório");
+      return;
+    }
+
+    if (!brandInEdit.tipo.trim()) {
+      notify("O tipo é obrigatório");
+      return;
+    }
+
     const brandPayLoad = {
       "codigo": brandInEdit.codigo,
       "nome": brandInEdit.nome,
@@ -60,11 +72,16 @@ const Tables = () => {
     }
 
     try {
-      const response = await apiPut("/marcas", brandPayLoad);
+      var response;
+      if (brandInEdit.codigo) {
+        response = await apiPut("/marcas", brandPayLoad);
+      } else {
+        response = await apiPost("/marcas", brandPayLoad);
+      }
       if (response.status === HttpStatus.Ok) {
         await getBrands();
         handleClose();
-        notify("Registro Salvo com Sucesso");      
+        notify("Registro Salvo com Sucesso");
       }
     } catch (error) {
       console.log(error);
@@ -81,7 +98,15 @@ const Tables = () => {
             <Card className="shadow">
               <CardHeader className="border-0">
                 <h3 className="mb-0">Marcas</h3>
+
+                <Button className="btn-icon btn-2" color="primary" type="button" onClick={() => handleOpen(brandFormat)}>
+                  <span className="btn-inner--icon">
+                    <i className="ni ni-fat-add" />
+                  </span>
+                  Novo
+                </Button>
               </CardHeader>
+              
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
@@ -150,7 +175,7 @@ const Tables = () => {
             <Row>
               <Col md="12">
                 <FormGroup>
-                  <p class="mb-0">Nome</p>
+                  <p className="mb-0">Nome</p>
                   <Input placeholder="Nome" type="text" defaultValue={brandInEdit.nome} onChange={(e) => brandInEdit.nome = e.target.value} />
                 </FormGroup>
               </Col>
@@ -159,7 +184,7 @@ const Tables = () => {
               <Col md="12">
                 <FormGroup>
                   <p className="mb-0">Tipo</p>
-                  <select class="form-control" value={brandInEdit.tipo} data-toggle="select" title="Tipo" data-placeholder="Selecione o tipo">
+                  <select className="form-control" defaultValue={brandInEdit.tipo} data-toggle="select" title="Tipo" data-placeholder="Selecione o tipo" onChange={(e) => brandInEdit.tipo = e.target.value} >
                     <option>Carro</option>
                     <option>Moto</option>
                     <option>Caminhão</option>
