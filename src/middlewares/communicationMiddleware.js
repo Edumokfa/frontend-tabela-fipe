@@ -1,5 +1,4 @@
 import axios, { HttpStatusCode } from "axios";
-import { customWarning } from "../utils/messageUtil"
 
 export const HttpStatus = HttpStatusCode;
 
@@ -21,8 +20,6 @@ export const redirectToLogin = () => {
 const handleApiError = (error) => {
   if (error.response && error.response.status === HttpStatusCode.Unauthorized) {
     redirectToLogin();
-  } else if (error.response && error.response.status === HttpStatusCode.Conflict) {
-    customWarning(error.response.data);
   } else {
     console.error(error);
   }
