@@ -7,12 +7,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { tokens } from "../../styles/theme";
 import { AuthContext } from "../../utils/authenticationUtil";
 import HomeIcon from '@mui/icons-material/Home';
-import PeopleIcon from '@mui/icons-material/People';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import InventoryIcon from '@mui/icons-material/Inventory';
 import SettingsIcon from "@mui/icons-material/Settings";
-import ForumIcon from '@mui/icons-material/Forum';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const Item = ({ title, to, icon, selected, setSelected, collapsed }) => {
   const theme = useTheme();
@@ -35,7 +31,7 @@ const Item = ({ title, to, icon, selected, setSelected, collapsed }) => {
 };
 
 const Sidebar = () => {
-  const { authenticated, loading } = useContext(AuthContext);
+  const { authenticated } = useContext(AuthContext);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -44,7 +40,7 @@ const Sidebar = () => {
 
   return (
     <>
-      {!loading && authenticated && <Box
+      {authenticated && <Box
         sx={{
           "& .pro-sidebar-inner": {
             background: `${colors.primary[400]} !important`,
@@ -111,52 +107,6 @@ const Sidebar = () => {
                 title="Configurações"
                 to="/config"
                 icon={<SettingsIcon />}
-                selected={selected}
-                setSelected={setSelected}
-                collapsed={isCollapsed}
-              />
-
-              <Item
-                title="Produto"
-                to="/product"
-                icon={<InventoryIcon />}
-                selected={selected}
-                setSelected={setSelected}
-                collapsed={isCollapsed}
-              />
-
-              <Item
-                title="Cliente"
-                to="/client"
-                icon={<PeopleIcon />}
-                selected={selected}
-                setSelected={setSelected}
-                collapsed={isCollapsed}
-              />
-
-              <Item
-                title="Pedido"
-                to="/purchase"
-                icon={<ShoppingCartIcon />}
-                selected={selected}
-                setSelected={setSelected}
-                collapsed={isCollapsed}
-              />
-
-              {!isCollapsed && (
-                <Typography
-                  variant="h6"
-                  color={colors.grey[300]}
-                  sx={{ m: "15px 0 5px 20px" }}
-                >
-                  Movimentos
-                </Typography>
-              )}
-
-              <Item
-                title="Conversas"
-                to="/conversation"
-                icon={<ForumIcon />}
                 selected={selected}
                 setSelected={setSelected}
                 collapsed={isCollapsed}

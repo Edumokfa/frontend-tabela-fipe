@@ -8,7 +8,6 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
 
     const login = async (log, password) => {
         try {
@@ -17,8 +16,6 @@ export const AuthProvider = ({ children }) => {
             const token = response.data.token;
 
             localStorage.setItem("access_token", token);
-
-            //api.defaults.headers.Authorization = `Bearer ${token}`;
 
             setUser(user);
             navigate("/");
@@ -33,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ authenticated: !!user, user, loading, login, logout, setUser, setLoading }} >
+        <AuthContext.Provider value={{ authenticated: !!user, user, login, logout, setUser }} >
             {children}
         </AuthContext.Provider>
     );

@@ -1,11 +1,10 @@
-import { Avatar, Box, ListItemIcon, ListItemText, Menu, MenuItem, useTheme, Typography } from "@mui/material";
+import { Box, ListItemIcon, ListItemText, Menu, MenuItem, useTheme, Typography } from "@mui/material";
 import { useContext, useState } from "react";
 import { ColorModeContext, tokens } from "../../styles/theme";
 import { AuthContext } from "../../utils/authenticationUtil";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import PersonIcon from '@mui/icons-material/Person';
 
 const Topbar = () => {
   const theme = useTheme();
@@ -24,10 +23,6 @@ const Topbar = () => {
     }
   };
 
-  const goToProfile = (event) => {
-    window.location.href = "/profile";
-  };
-
   return (
     <>
       {!loading && authenticated && <Box display="flex" justifyContent="space-between" p={2}>
@@ -38,8 +33,7 @@ const Topbar = () => {
         ></Box>
 
         <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }} onClick={handleClick}>
-          <Avatar sx={{ width: 32, height: 32 }}>{user.name.charAt(0).toUpperCase()}</Avatar>
-          <Typography variant="h4" ml={2}>{user.name}</Typography>
+          <Typography variant="h4" ml={2}>{user}</Typography>
         </Box >
 
         <Menu
@@ -68,13 +62,6 @@ const Topbar = () => {
             },
           }}
         >
-          <MenuItem onClick={goToProfile}>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText>Meu Perfil</ListItemText>
-          </MenuItem>
-
           <MenuItem
             onClick={colorMode.toggleColorMode}
           >

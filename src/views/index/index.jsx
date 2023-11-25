@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Box } from "@mui/material";
-import Header from "../../components/Header";
 import DataGrid from "../../components/DataGrid";
 import { apiGet } from '../../middlewares/communicationMiddleware';
 
@@ -18,19 +17,19 @@ const Dashboard = () => {
 
    const rows = brandList.map((brand) => ({
     id: brand.codigo,
-    name: brand.nome
+    name: brand.nome,
+    type: brand.tipo
   }));
 
   const columns = [
     { field: "id", headerName: "Código", headerAlign: "center", align: "center", minWidth: 120 },
-    { field: "name", headerName: "Nome", minWidth: 265 }
+    { field: "name", headerName: "Nome", minWidth: 650 },
+    { field: "type", headerName: "Tipo", minWidth: 100 }
   ];
 
   return (
     <Box sx={{margin: "20px", marginTop: "5px"}}>
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="Página Inicial" />
-
         <div style={{ height: 800, width: "100%" }}>
           <DataGrid
             rows={rows}

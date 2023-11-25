@@ -14,7 +14,6 @@ export const api = axios.create(
 );
 
 export const redirectToLogin = () => {
-  api.defaults.headers.Authorization = null;
   window.location.href = "/login";
   localStorage.removeItem("access_token");
 }
