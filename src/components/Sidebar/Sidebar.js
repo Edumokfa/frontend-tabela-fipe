@@ -102,7 +102,12 @@ const Sidebar = (props) => {
           </NavbarBrand>
         ) :
           <NavbarBrand className="pt-0 mb-0" {...navbarBrandProps}>
-            <h3 className="mb-0">Search Fipe App</h3>
+            <Link
+              className="h4 mb-0 text-uppercase d-lg-inline-block"
+              to="/"
+            >
+              Search Fipe App
+            </Link>
           </NavbarBrand>}
         {/* User */}
         <Nav className="align-items-center d-md-none">

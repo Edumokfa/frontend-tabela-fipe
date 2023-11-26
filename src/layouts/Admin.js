@@ -38,7 +38,6 @@ const Admin = (props) => {
       <div className="main-content" ref={mainContent}>
         <AdminNavbar
           {...props}
-          brandText={"Search Fipe App"}
         />
         <Routes>
           {getRoutes(routes)}
