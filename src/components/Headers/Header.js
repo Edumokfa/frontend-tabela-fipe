@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { apiGet } from '../../middlewares/communicationMiddleware';
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
+import { formatDateTimeYYYYMMDDHHMMSS, newDate } from "../../utils/dateUtil"
 
 const Header = () => {
   const [numberOfBrands, setNumberOfBrands] = useState("");
   const [numberOfModels, setNumberOfModels] = useState("");
   const [numberOfVehicles, setNumberOfVehicles] = useState("");
+  const [lastIterationLogBrand, setLastIterationLogBrand] = useState("");
+  const [lastIterationLogModel, setLastIterationLogModel] = useState("");
 
   useEffect(() => {
     getInfos();
@@ -20,6 +23,12 @@ const Header = () => {
 
     response = await apiGet("/vehicles/quantidade");
     setNumberOfVehicles(response.data);
+
+    response = await apiGet("/logs/B");
+    setLastIterationLogBrand(response.data);
+
+    response = await apiGet("/logs/M");
+    setLastIterationLogModel(response.data);
   }
 
   return (
@@ -50,6 +59,12 @@ const Header = () => {
                         </div>
                       </Col>
                     </Row>
+                    <p className="mt-3 mb-0 text-muted text-sm">
+                      <span className="text-success mr-2">
+                        <i className="fa fa-clock text-blue" />
+                      </span>
+                      <span className="text-nowrap">Atualizado em {formatDateTimeYYYYMMDDHHMMSS(lastIterationLogBrand.data)}</span>
+                    </p>
                   </CardBody>
                 </Card>
               </Col>
@@ -74,6 +89,12 @@ const Header = () => {
                         </div>
                       </Col>
                     </Row>
+                    <p className="mt-3 mb-0 text-muted text-sm">
+                      <span className="text-success mr-2">
+                        <i className="fa fa-clock text-green" />
+                      </span>
+                      <span className="text-nowrap">Atualizado em {formatDateTimeYYYYMMDDHHMMSS(lastIterationLogModel.data)}</span>
+                    </p>
                   </CardBody>
                 </Card>
               </Col>
@@ -98,6 +119,12 @@ const Header = () => {
                         </div>
                       </Col>
                     </Row>
+                    <p className="mt-3 mb-0 text-muted text-sm">
+                      <span className="text-success mr-2">
+                        <i className="fa fa-clock text-green" />
+                      </span>
+                      <span className="text-nowrap">Atualizado em {formatDateTimeYYYYMMDDHHMMSS(lastIterationLogModel.data)}</span>
+                    </p>
                   </CardBody>
                 </Card>
               </Col>

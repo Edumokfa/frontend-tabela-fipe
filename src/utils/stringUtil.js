@@ -1,5 +1,4 @@
 import React from "react";
-import InputMask from 'react-input-mask';
 
 export function onlyNumbers(text) {
   if (stringEmpty(text)) {
@@ -63,23 +62,3 @@ export function stringWithoutHTMLTags(text) {
 export function stringEmpty(text) {
   return !stringNotEmpty(text);
 }
-
-export const maskPhone = React.forwardRef((props, ref) => {
-  return (
-    <InputMask
-      {...props}
-      mask="99(99)9999-9999"
-      ref={ref}
-    />
-  );
-});
-
-export const maskCEP = React.forwardRef((props, ref) => {
-  return (
-    <InputMask
-      {...props}
-      mask="99999-999"
-      ref={ref}
-    />
-  );
-});

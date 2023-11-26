@@ -7,17 +7,11 @@ import { PropTypes } from "prop-types";
 
 // reactstrap components
 import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
   Collapse,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  FormGroup,
   Form,
   Input,
   InputGroupAddon,
@@ -29,8 +23,6 @@ import {
   NavItem,
   NavLink,
   Nav,
-  Progress,
-  Table,
   Container,
   Row,
   Col,
@@ -108,7 +100,10 @@ const Sidebar = (props) => {
               src={logo.imgSrc}
             />
           </NavbarBrand>
-        ) : null}
+        ) :
+          <NavbarBrand className="pt-0 mb-0" {...navbarBrandProps}>
+            <h3 className="mb-0">Search Fipe App</h3>
+          </NavbarBrand>}
         {/* User */}
         <Nav className="align-items-center d-md-none">
           <UncontrolledDropdown nav>
