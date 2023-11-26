@@ -16,7 +16,7 @@ import {
 import toast, { Toaster } from 'react-hot-toast';
 import Header from "components/Headers/Header.js";
 
-const Tables = () => {
+const Brands = () => {
   const [brandList, setBrandList] = useState([]);
   const brandFormat = { codigo: "", nome: "", tipo: "Carro" };
   const [brandInEdit, setBrandInEdit] = useState(brandFormat);
@@ -34,6 +34,7 @@ const Tables = () => {
 
   const getBrands = async () => {
     const response = await apiGet("/marcas");
+    console.log(response);
     setBrandList(response.data);
   }
 
@@ -214,4 +215,4 @@ const Tables = () => {
   );
 };
 
-export default Tables;
+export default Brands;
