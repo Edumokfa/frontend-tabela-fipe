@@ -4,21 +4,38 @@ import '@testing-library/jest-dom';
 import Brands from './Brands';
 import Header from '../../components/Headers/Header';
 
-// Mock the communicationMiddleware functions
-jest.mock('../../middlewares/communicationMiddleware', () => ({
-  apiGet: jest.fn(() => Promise.resolve({ data: [] })),
-  apiDelete: jest.fn(() => Promise.resolve({ status: 200 })),
-  apiPost: jest.fn(() => Promise.resolve({ status: 200 })),
-  apiPut: jest.fn(() => Promise.resolve({ status: 200 })),
-  HttpStatus: { Ok: 200 },
-}));
+import communicationMiddleware from '../../middlewares/communicationMiddleware';
+import { act } from 'react-dom/test-utils';
+
+jest.mock('../../middlewares/communicationMiddleware', () => {
+  const mockApiGet = jest.fn();
+
+  mockApiGet.mockImplementation(async (url) => {
+    switch (url) {
+      case '/marcas':
+        return { data: [{"codigo": 2, "nome": "Agrario", "tipo": "Carro"}] }; 
+      default:
+        return { data: [] };
+    }
+  });
+
+  return { apiGet: mockApiGet };
+});
 
 describe('Brands Component', () => {
   it('renders without crashing', async () => {
-    render(<Header />, <Brands />);
-    // Check if the component renders without crashing
-    await waitFor(() => expect(screen.getByText('Marcas')).toBeInTheDocument());
+    await communicationMiddleware.apiGet.mockResolvedValue({ data: [] });
+
+    render(<Brands />);
+    
+    expect(screen.getByText('Marcas', { selector: 'h3' })).toBeInTheDocument();
   });
 
-  // Add more test cases for other functionalities as needed
+  it('show data', async () => {
+    act(() => {
+      render(<Brands />);
+    });
+    
+    expect(screen.getByText('Acura')).toBeInTheDocument();
+  });
 });
