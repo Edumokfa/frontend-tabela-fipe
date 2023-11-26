@@ -189,64 +189,73 @@ const Models = () => {
                     )}
                   </thead>
                   <tbody>
-                    {modelList.length === 0
-                      ? <p className="p-4"> Sem modelos para exibir </p>
-                      : modelList.map((model, index) => (
-                          <>
-                            <tr key={index}>
-                              <td className="text-left">
-                                <div id={model.codigo} style={styleRotateIcon}>
-                                  <span
-                                    className="btn-inner--icon"
-                                    onClick={() => handleIconClick(model)}
-                                  >
-                                    <i className="ni ni-bold-right" />
-                                  </span>
-                                </div>
+                    {modelList.length === 0 ? (
+                      <tr key="noModels">
+                        <td colSpan="3">
+                          <p className="p-4"> Sem modelos para exibir </p>
+                        </td>
+                      </tr>
+                    ) : (
+                      modelList.map((model, index) => (
+                        <React.Fragment key={index}>
+                          <tr key={`mainRow_${index}`}>
+                            <td className="text-left">
+                              <div id={model.codigo} style={styleRotateIcon}>
+                                <span
+                                  className="btn-inner--icon"
+                                  onClick={() => handleIconClick(model)}
+                                >
+                                  <i className="ni ni-bold-right" />
+                                </span>
+                              </div>
+                            </td>
+                            <td>{model.codigo}</td>
+                            <td>{model.nome}</td>
+                          </tr>
+                          {idToExpandRow === model.codigo && (
+                            <tr key={`expandedRow_${model.codigo}`}>
+                              <td colSpan="3">
+                                <Table
+                                  style={{
+                                    width: "100%",
+                                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                                  }}
+                                >
+                                  <thead className="thead-light">
+                                    <tr>
+                                      <th scope="col">Código</th>
+                                      <th scope="col">Descrição</th>
+                                      <th scope="col">Modelo</th>
+                                      <th scope="col">Valor</th>
+                                      <th scope="col">Combustível</th>
+                                      <th scope="col">Ano / Modelo</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {model.anos === 0
+                                      ? (
+                                        <tr key={`noYears_${model.codigo}`}>
+                                          <td colSpan="6">Sem Anos para exibir</td>
+                                        </tr>
+                                      )
+                                      : model.anos.map((ano) => (
+                                          <tr key={`years_${ano.codigo}`}>
+                                            <td>{ano.codigo}</td>
+                                            <td>{ano.nome}</td>
+                                            <td>{ano.veiculo.Modelo}</td>
+                                            <td>{ano.veiculo.Valor}</td>
+                                            <td>{ano.veiculo.Combustivel}</td>
+                                            <td>{ano.veiculo.AnoModelo}</td>
+                                          </tr>
+                                        ))}
+                                  </tbody>
+                                </Table>
                               </td>
-                              <td>{model.codigo}</td>
-                              <td>{model.nome}</td>
                             </tr>
-                            {idToExpandRow === model.codigo && (
-                              <tr key={index * -1}>
-                                <td colSpan="3">
-                                  <Table
-                                    style={{
-                                      width: "100%",
-                                      "box-shadow":
-                                        "0 4px 8px rgba(0, 0, 0, 0.1)",
-                                    }}
-                                  >
-                                    <thead className="thead-light">
-                                      <tr>
-                                        <th scope="col">Código</th>
-                                        <th scope="col">Descrição</th>
-                                        <th scope="col">Modelo</th>
-                                        <th scope="col">Valor</th>
-                                        <th scope="col">Combustível</th>
-                                        <th scope="col">Ano / Modelo</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      {model.anos === 0
-                                        ? "Sem Anos para exibir"
-                                        : model.anos.map((ano, index) => (
-                                            <tr key={index}>
-                                              <td>{ano.codigo}</td>
-                                              <td>{ano.nome}</td>
-                                              <td>{ano.veiculo.Modelo}</td>
-                                              <td>{ano.veiculo.Valor}</td>
-                                              <td>{ano.veiculo.Combustivel}</td>
-                                              <td>{ano.veiculo.AnoModelo}</td>
-                                            </tr>
-                                          ))}
-                                    </tbody>
-                                  </Table>
-                                </td>
-                              </tr>
-                            )}
-                          </>
-                        ))}
+                          )}
+                        </React.Fragment>
+                      ))
+                    )}
                   </tbody>
                 </Table>
               }

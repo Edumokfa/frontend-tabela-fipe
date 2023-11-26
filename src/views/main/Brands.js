@@ -117,8 +117,9 @@ const Tables = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {brandList.length === 0 ? "Sem marcas exibir" : brandList.map((brand, index) => (
-                    <tr key={index}>
+                  {brandList.length === 0 ? <tr key={"no_brand"}><td>Sem marcas exibir</td></tr> : 
+                  brandList.map((brand, index) => (
+                    <tr key={`brand${index}`}>
                       <td>{brand.codigo}</td>
                       <td>{brand.nome}</td>
                       <td>{brand.tipo}</td>

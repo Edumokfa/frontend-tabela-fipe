@@ -2,7 +2,6 @@
 import Index from "views/Index.js";
 import Brands from "views/main/Brands.js";
 import Models from "views/main/Models";
-import Profile from "views/main/Profile.js";
 
 var routes = [
   {

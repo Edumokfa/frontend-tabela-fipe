@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { apiGet } from '../../middlewares/communicationMiddleware';
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
-import { formatDateTimeYYYYMMDDHHMMSS, newDate } from "../../utils/dateUtil"
+import { formatDateTimeYYYYMMDDHHMMSS } from "../../utils/dateUtil"
 
 const Header = () => {
   const [numberOfBrands, setNumberOfBrands] = useState("");

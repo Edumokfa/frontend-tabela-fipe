@@ -1,5 +1,3 @@
-import React from "react";
-
 export function onlyNumbers(text) {
   if (stringEmpty(text)) {
     return;
