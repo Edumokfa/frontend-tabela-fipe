@@ -4,6 +4,8 @@ import '@testing-library/jest-dom';
 import Brands from './Brands';
 import communicationMiddleware from '../../middlewares/communicationMiddleware';
 
+jest.mock('../../components/Headers/Header.js', () => () => null);
+
 jest.mock('../../middlewares/communicationMiddleware', () => ({
   apiGet: jest.fn(),
   apiDelete: jest.fn(),
