@@ -76,7 +76,6 @@ const Sidebar = (props) => {
       id="sidenav-main"
     >
       <Container fluid>
-        {/* Toggler */}
         <button
           className="navbar-toggler"
           type="button"
@@ -100,7 +99,6 @@ const Sidebar = (props) => {
           </NavbarBrand>
         )}
         <Collapse navbar isOpen={collapseOpen}>
-          {/* Collapse header */}
           <div className="navbar-collapse-header d-md-none">
             <Row>
               {logo ? (

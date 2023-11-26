@@ -49,7 +49,6 @@ describe('Brand auto complete', () => {
     render(<Models />);
 
     await waitFor(() => {
-      // Check if the "Sem marcas exibir" message is rendered
       expect(screen.getByText('Sem modelos para exibir')).toBeInTheDocument();
     });
   });

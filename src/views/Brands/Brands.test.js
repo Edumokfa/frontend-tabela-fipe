@@ -51,7 +51,6 @@ describe('Brands Component', () => {
     render(<Brands />);
 
     await waitFor(() => {
-      // Check if the "Sem marcas exibir" message is rendered
       expect(screen.getByText('Sem marcas exibir')).toBeInTheDocument();
     });
   });

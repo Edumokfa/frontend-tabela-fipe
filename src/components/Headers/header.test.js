@@ -43,7 +43,6 @@ describe("Header Component", () => {
   test('Teste com resposta da API', async () => {
   communicationMiddleware.apiGet.mockResolvedValue({ data });
 
-  // Renderizar o componente
   render(<Header />);
   
   await waitFor(() => {
