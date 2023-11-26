@@ -114,16 +114,18 @@ const Models = () => {
 
   const handleIconClick = async (model) => {
     modelList.forEach(m => {
-      document.getElementById(m.codigo).style.transform = ``;
-      m.iconRotation = 0;
+      if ( m.codigo !== model.codigo ) {
+        document.getElementById(m.codigo).style.transform = `rotate(0deg)`;
+        m.iconRotation = 0;
+      }
     });
-    const prevRotation = model.iconRotation;
-    model.iconRotation = 90;
+    const iconRotation = model.iconRotation;
+    model.iconRotation = iconRotation > 0 ? 0 : 90;
     const iconElement = document.getElementById(model.codigo);
     if (iconElement) {
       iconElement.style.transform = `rotate(${model.iconRotation}deg)`;
     }
-    if (prevRotation > 0) {
+    if (iconRotation > 0) {
       setIdToExpandRow(null);
     } else {
       setIdToExpandRow(model.codigo);
@@ -181,7 +183,7 @@ const Models = () => {
                           <td>{model.nome}</td>
                         </tr>
                         {idToExpandRow === model.codigo &&
-                          <tr>
+                          <tr key={index * -1}>
                             <td colSpan="3">
                             <Table style={{"width": "100%", "box-shadow": "0 4px 8px rgba(0, 0, 0, 0.1)"}}>
                               <thead className="thead-light">
