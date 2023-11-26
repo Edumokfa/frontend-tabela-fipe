@@ -1,10 +1,8 @@
 
 import Index from "views/Index.js";
-import Profile from "views/main/Profile.js";
-import Maps from "views/main/Maps.js";
-import Register from "views/main/Register.js";
 import Brands from "views/main/Brands.js";
-import Icons from "views/main/Icons.js";
+import Models from "views/main/Models";
+import Profile from "views/main/Profile.js";
 
 var routes = [
   {
@@ -22,10 +20,10 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/icons",
+    path: "/models",
     name: "Modelos",
     icon: "ni ni ni-book-bookmark text-purple",
-    component: <Icons />,
+    component: <Models />,
     layout: "/admin",
   },
   {
