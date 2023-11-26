@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
@@ -11,6 +11,8 @@ const Admin = (props) => {
   const [showScrollButton, setShowScrollButton] = useState(false);
 
   useEffect(() => {
+    document.title = "Search Fipe App";
+
     const handleScroll = () => {
       const isTop = document.documentElement.scrollTop > 100;
       setShowScrollButton(isTop);
