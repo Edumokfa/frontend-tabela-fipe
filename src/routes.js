@@ -22,16 +22,9 @@ var routes = [
   {
     path: "/models",
     name: "Modelos",
-    icon: "ni ni ni-book-bookmark text-purple",
+    icon: "ni ni ni-ambulance text-green",
     component: <Models />,
     layout: "/admin",
   },
-  {
-    path: "/veiculos",
-    name: "Veículos",
-    icon: "ni ni ni-ambulance text-green",
-    component: <Profile />,
-    layout: "/admin",
-  }
 ];
 export default routes;
