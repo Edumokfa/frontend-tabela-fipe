@@ -34,7 +34,6 @@ const Brands = () => {
 
   const getBrands = async () => {
     const response = await apiGet("/marcas");
-    console.log(response);
     setBrandList(response.data);
   }
 

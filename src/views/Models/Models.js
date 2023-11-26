@@ -110,7 +110,6 @@ const Models = () => {
 
   const getBrands = async () => {
     const response = await apiGet("/marcas");
-    console.log(response.data);
     setBrandList(response.data);
   };
 
