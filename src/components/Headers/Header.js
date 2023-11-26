@@ -15,20 +15,24 @@ const Header = () => {
   }, []);
 
   const getInfos = async () => {
-    let response = await apiGet("/marcas/quantidade");
-    setNumberOfBrands(response.data);
+    try {
+      let response = await apiGet("/marcas/quantidade");
+      setNumberOfBrands(response.data);
 
-    response = await apiGet("/marcas/modelos/quantidade");
-    setNumberOfModels(response.data);
+      response = await apiGet("/marcas/modelos/quantidade");
+      setNumberOfModels(response.data);
 
-    response = await apiGet("/vehicles/quantidade");
-    setNumberOfVehicles(response.data);
+      response = await apiGet("/veiculos/quantidade");
+      setNumberOfVehicles(response.data);
 
-    response = await apiGet("/logs/B");
-    setLastIterationLogBrand(response.data);
+      response = await apiGet("/logs/B");
+      setLastIterationLogBrand(response.data);
 
-    response = await apiGet("/logs/M");
-    setLastIterationLogModel(response.data);
+      response = await apiGet("/logs/M");
+      setLastIterationLogModel(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
