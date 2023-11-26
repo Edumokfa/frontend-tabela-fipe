@@ -1,21 +1,15 @@
-FROM node:18
+FROM node:16.2.0
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY package.json .
+COPY package*.json ./
 
-RUN npm install -g npm@10.2.4
-
-RUN npm i
-
-RUN npm i @emotion/react @emotion/styled
+RUN npm install
 
 COPY . .
 
-EXPOSE 3000
-
 RUN npm run build
 
-RUN npm install -g serve
+EXPOSE 3000
 
-CMD ["serve", "-s", "build"]
+CMD ["npm", "start"]
