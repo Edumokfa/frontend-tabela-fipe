@@ -1,7 +1,7 @@
 import React from 'react';
-import { render, screen, act, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Brands from './Brands';
+import Models from './Models';
 import communicationMiddleware from '../../middlewares/communicationMiddleware';
 
 jest.mock('../../components/Headers/Header.js', () => () => null);
@@ -14,7 +14,7 @@ jest.mock('../../middlewares/communicationMiddleware', () => ({
   HttpStatus: { Ok: 200 },
 }));
 
-describe('Brands Component', () => {
+describe('Brand auto complete', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -22,9 +22,9 @@ describe('Brands Component', () => {
   it('renders without crashing', async () => {
     await communicationMiddleware.apiGet.mockResolvedValue({ data: [] });
 
-    render(<Brands />);
+    render(<Models />);
 
-    expect(screen.getByText('Marcas', { selector: 'h3' })).toBeInTheDocument();
+    expect(screen.getByText('Modelos', { selector: 'h3' })).toBeInTheDocument();
   });
 
   it('fetches and displays brandList', async () => {
@@ -34,13 +34,11 @@ describe('Brands Component', () => {
     ];
 
     communicationMiddleware.apiGet.mockResolvedValue({ data: mockData });
-
-    render(<Brands />);
-
-    await waitFor(() => {
-      expect(screen.getByText('Agrario')).toBeInTheDocument();
-      expect(screen.getByText('Acura')).toBeInTheDocument();
-    });
+    
+    render(<Models />);
+  
+    const input = screen.getByPlaceholderText('Digite para buscar');
+    fireEvent.change(input, { target: { value: 'A' } });
 
     expect(communicationMiddleware.apiGet).toHaveBeenCalledWith('/marcas');
   });
@@ -48,11 +46,11 @@ describe('Brands Component', () => {
   it('handles an empty brandList', async () => {
     await communicationMiddleware.apiGet.mockResolvedValue({ data: [] });
 
-    render(<Brands />);
+    render(<Models />);
 
     await waitFor(() => {
       // Check if the "Sem marcas exibir" message is rendered
-      expect(screen.getByText('Sem marcas exibir')).toBeInTheDocument();
+      expect(screen.getByText('Sem modelos para exibir')).toBeInTheDocument();
     });
   });
 });

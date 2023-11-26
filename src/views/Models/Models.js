@@ -35,6 +35,7 @@ const AutoComplete = ({ options, onSelect }) => {
     <div style={{ position: "relative", display: "inline-block" }}>
       <input
         type="text"
+        id="autoComplete"
         value={inputValue}
         onChange={handleInputChange}
         placeholder="Digite para buscar"
@@ -109,6 +110,7 @@ const Models = () => {
 
   const getBrands = async () => {
     const response = await apiGet("/marcas");
+    console.log(response.data);
     setBrandList(response.data);
   };
 
