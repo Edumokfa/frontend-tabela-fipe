@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, act, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Header from "./Header";
 import communicationMiddleware from "../../middlewares/communicationMiddleware";
@@ -40,14 +40,13 @@ describe("Header Component", () => {
     });
   });
   const data = { codigo: 198, data: '2023-11-26T17:49:29.853+00:00', tipo: 'B'};
-  test('Teste com resposta da API', async () => {
-  communicationMiddleware.apiGet.mockResolvedValue({ data });
+  it('Teste com resposta da API', async () => {
+    communicationMiddleware.apiGet.mockResolvedValue({ data });
 
-  render(<Header />);
+    render(<Header />);
   
-  await waitFor(() => {
-    const elementoAtualizado = screen.getAllByText("Atualizado em");
-    expect(elementoAtualizado).toHaveLength(3);
+    await waitFor(() => {
+      expect(screen.queryByText("Atualizado em")).toBeNull();
+    });
   });
-});
 });

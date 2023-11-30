@@ -62,12 +62,14 @@ const Header = () => {
                         </div>
                       </Col>
                     </Row>
-                    <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-success mr-2">
-                        <i className="fa fa-clock text-blue" />
-                      </span>
-                      <span className="text-nowrap">Atualizado em {formatDateTimeYYYYMMDDHHMMSS(lastIterationLogBrand.data)}</span>
-                    </p>
+                    {lastIterationLogBrand.data &&
+                      <p className="mt-3 mb-0 text-muted text-sm">
+                        <span className="text-success mr-2">
+                          <i className="fa fa-clock text-blue" />
+                        </span>
+                        <span className="text-nowrap">Atualizado em {formatDateTimeYYYYMMDDHHMMSS(lastIterationLogBrand.data)}</span>
+                      </p>
+                    }
                   </CardBody>
                 </Card>
               </Col>
@@ -92,12 +94,14 @@ const Header = () => {
                         </div>
                       </Col>
                     </Row>
-                    <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-success mr-2">
-                        <i className="fa fa-clock text-green" />
-                      </span>
-                      <span className="text-nowrap">Atualizado em {formatDateTimeYYYYMMDDHHMMSS(lastIterationLogModel.data)}</span>
-                    </p>
+                    {lastIterationLogModel.data &&
+                      <p className="mt-3 mb-0 text-muted text-sm">
+                        <span className="text-success mr-2">
+                          <i className="fa fa-clock text-green" />
+                        </span>
+                        <span className="text-nowrap">Atualizado em {formatDateTimeYYYYMMDDHHMMSS(lastIterationLogModel.data)}</span>
+                      </p>
+                    }
                   </CardBody>
                 </Card>
               </Col>
@@ -122,12 +126,14 @@ const Header = () => {
                         </div>
                       </Col>
                     </Row>
-                    <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-success mr-2">
-                        <i className="fa fa-clock text-green" />
-                      </span>
-                      <span className="text-nowrap">Atualizado em {formatDateTimeYYYYMMDDHHMMSS(lastIterationLogModel.data)}</span>
-                    </p>
+                    {lastIterationLogModel.data && 
+                        <p className="mt-3 mb-0 text-muted text-sm">
+                          <span className="text-success mr-2">
+                            <i className="fa fa-clock text-green" />
+                          </span>
+                          <span className="text-nowrap">Atualizado em {formatDateTimeYYYYMMDDHHMMSS(lastIterationLogModel.data)}</span>
+                        </p>
+                    }
                   </CardBody>
                 </Card>
               </Col>
